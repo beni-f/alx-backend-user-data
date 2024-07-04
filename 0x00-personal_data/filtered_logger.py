@@ -31,10 +31,9 @@ def get_logger() -> logging.Logger:
         returns a logging.Logger object
     """
     logger = logging.getLogger("user_data")
-    logger.setLevel(logging.INFO)
     stream_handler = logging.StreamHandler()
-    formatter = logging.Formatter(RedactingFormatter(PII_FIELDS))
-    stream_handler.setFormatter(formatter)
+    stream_handler.setFormatter(RedactingFormatter(PII_FIELDS))
+    logger.setLevel(logging.INFO)
     logger.propagate = False
     logger.addHandler(stream_handler)
     return logger
@@ -58,8 +57,27 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     return conn
 
 
-def main() -> None:
-    db = get_db()
+def main():
+    """Logs the information about user records in a table.
+    """
+    fields = "name,email,phone,ssn,password,ip,last_login,user_agent"
+    columns = fields.split(',')
+    query = "SELECT {} FROM users;".format(fields)
+    info_logger = get_logger()
+    connection = get_db()
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        for row in rows:
+            record = map(
+                lambda x: '{}={}'.format(x[0], x[1]),
+                zip(columns, row),
+            )
+            msg = '{};'.format('; '.join(list(record)))
+            args = ("user_data", logging.INFO, None, None, msg, None, None)
+            log_record = logging.LogRecord(*args)
+            info_logger.handle(log_record)
+
 
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
@@ -81,10 +99,6 @@ class RedactingFormatter(logging.Formatter):
             self.fields, self.REDACTION, record.msg, self.SEPARATOR))
         return super(RedactingFormatter, self).format(record)
 
-db = get_db()
-cursor = db.cursor()
-cursor.execute("SELECT COUNT(*) FROM users;")
-for row in cursor:
-    print(row[0])
-cursor.close()
-db.close()
+
+if __name__ == "__main__":
+    main()
