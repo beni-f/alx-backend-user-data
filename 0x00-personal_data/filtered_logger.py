@@ -58,6 +58,9 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     return conn
 
 
+def main() -> None:
+    db = get_db()
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
@@ -77,3 +80,11 @@ class RedactingFormatter(logging.Formatter):
         record.msg = (filter_datum(
             self.fields, self.REDACTION, record.msg, self.SEPARATOR))
         return super(RedactingFormatter, self).format(record)
+
+db = get_db()
+cursor = db.cursor()
+cursor.execute("SELECT COUNT(*) FROM users;")
+for row in cursor:
+    print(row[0])
+cursor.close()
+db.close()
