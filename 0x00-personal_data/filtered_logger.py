@@ -4,6 +4,7 @@ Regex-ing
 """
 import re
 import logging
+from typing import List
 
 
 class RedactingFormatter(logging.Formatter):
@@ -23,11 +24,15 @@ class RedactingFormatter(logging.Formatter):
         """
             Filters incoming log records using the filter_datum function.
         """
-        record.msg = filter_datum(self.fields, self.REDACTION, record.msg, self.SEPARATOR)
+        record.msg = filter_datum(
+            self.fields, self.REDACTION, record.msg, self.SEPARATOR
+        )
         return super(RedactingFormatter, self).format(record)
-        
 
-def filter_datum(fields, redaction, message, separator) -> str:
+
+def filter_datum(
+    fields: List[str], redaction: str, message: str, separator: str
+) -> str:
     """
         Returns the log message obfuscated
     """
