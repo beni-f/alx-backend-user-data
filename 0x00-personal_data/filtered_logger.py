@@ -7,6 +7,18 @@ import logging
 from typing import List
 
 
+def filter_datum(
+    fields: List[str], redaction: str, message: str, separator: str
+) -> str:
+    """
+        Returns the log message obfuscated
+    """
+    pattern = f"({'|'.join(map(re.escape, fields))})=.*?{re.escape(separator)}"
+    return re.sub(
+        pattern, lambda m: f"{m.group(1)}={redaction}{separator}", message
+    )
+
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
@@ -28,21 +40,3 @@ class RedactingFormatter(logging.Formatter):
             self.fields, self.REDACTION, record.msg, self.SEPARATOR
         ))
         return super(RedactingFormatter, self).format(record)
-
-
-def filter_datum(
-    fields: List[str], redaction: str, message: str, separator: str
-) -> str:
-    """
-        Returns the log message obfuscated
-    """
-    pattern = f"({'|'.join(map(re.escape, fields))})=.*?{re.escape(separator)}"
-    return re.sub(
-        pattern, lambda m: f"{m.group(1)}={redaction}{separator} ", message
-    )
-
-
-message = "name=Bob;email=bob@dylan.com;ssn=000-123-0000;password=bobby2019;"
-log_record = logging.LogRecord("my_logger", logging.INFO, None, None, message, None, None)
-formatter = RedactingFormatter(fields=("email", "ssn", "password"))
-print(formatter.format(log_record))
