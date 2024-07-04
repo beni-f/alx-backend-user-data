@@ -24,9 +24,9 @@ class RedactingFormatter(logging.Formatter):
         """
             Filters incoming log records using the filter_datum function.
         """
-        record.msg = filter_datum(
+        record.msg = (filter_datum(
             self.fields, self.REDACTION, record.msg, self.SEPARATOR
-        )
+        ))
         return super(RedactingFormatter, self).format(record)
 
 
@@ -38,5 +38,11 @@ def filter_datum(
     """
     pattern = f"({'|'.join(map(re.escape, fields))})=.*?{re.escape(separator)}"
     return re.sub(
-        pattern, lambda m: f"{m.group(1)}={redaction}{separator}", message
+        pattern, lambda m: f"{m.group(1)}={redaction}{separator} ", message
     )
+
+
+message = "name=Bob;email=bob@dylan.com;ssn=000-123-0000;password=bobby2019;"
+log_record = logging.LogRecord("my_logger", logging.INFO, None, None, message, None, None)
+formatter = RedactingFormatter(fields=("email", "ssn", "password"))
+print(formatter.format(log_record))
