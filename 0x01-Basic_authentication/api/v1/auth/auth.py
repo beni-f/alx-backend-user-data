@@ -18,8 +18,7 @@ class Auth():
             Authorization header function
         """
         return None
-
-    def current_user(self, request=None) -> TypeVar('User'):  # type: ignore
+    def current_user(self, request=None) -> TypeVar('User'):
         """
             Figures out the current user
         """
