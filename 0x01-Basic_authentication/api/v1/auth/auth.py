@@ -18,8 +18,8 @@ class Auth():
             Authorization header function
         """
         return None
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request=None) -> TypeVar('User'):  # type: ignore
         """
-            Figures out the current user
+            request will be the Flask request object
         """
         return None
