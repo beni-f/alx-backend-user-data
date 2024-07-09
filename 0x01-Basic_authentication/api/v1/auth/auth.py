@@ -9,18 +9,18 @@ from flask import request
 class Auth():
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
-            Not used yet.
+            Authentication require path function
         """
         return False
 
     def authorization_header(self, request=None) -> str:
         """
-            Not used yet.
+            Authorization header function
         """
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):  # type: ignore
         """
-            Not used yet.
+            Figures out the current user
         """
         return None
