@@ -20,6 +20,6 @@ class Auth():
         return None
     def current_user(self, request=None) -> TypeVar('User'):  # type: ignore
         """
-            request will be the Flask request object
+            Figures out the current user
         """
         return None
