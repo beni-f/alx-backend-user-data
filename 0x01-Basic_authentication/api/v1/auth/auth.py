@@ -41,7 +41,7 @@ class Auth():
         """
         if request is None:
             return None
-        if request not in request.headers:
+        if 'Authorization' not in request.headers:
             return None
         return request.headers['Authorization']
 
@@ -49,3 +49,4 @@ class Auth():
         """
             Figures out the current user
         """
+        return None
