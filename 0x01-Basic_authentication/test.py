@@ -1,3 +1,3 @@
 test = "hello"
 test = test.replace('o', '')
-print(test)
+print(test.startswith('he'))
