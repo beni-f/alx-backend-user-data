@@ -1,3 +1,7 @@
 test = "hello"
 test = test.replace('o', '')
-print(test.startswith('he'))
+
+if 'h' in test:
+    print('yes')
+else:
+    print('no')
