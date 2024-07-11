@@ -31,7 +31,7 @@ class SessionAuth(Auth):
         """
         if not session_id:
             return None
-        return self.user_id_by_session_id.get(session_id)
+        return self.user_id_by_session_id.get(uuid.UUID(session_id))
 
     def current_user(self, request=None) -> TypeVar('User'):  # type: ignore
         """
@@ -42,9 +42,8 @@ class SessionAuth(Auth):
         session_id = self.session_cookie(request)
         if not session_id:
             return None
-        try:
-            user_id = self.user_id_by_session_id.get(uuid.UUID(session_id))
-        except Exception:
+        user_id = self.user_id_for_session_id(session_id)
+        if not user_id:
             return None
         user = User.get(user_id)
         return user
