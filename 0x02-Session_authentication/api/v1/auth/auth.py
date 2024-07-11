@@ -4,6 +4,7 @@ Auth Class
 """
 from typing import List, TypeVar
 from flask import request
+import os
 
 
 class Auth():
@@ -50,3 +51,11 @@ class Auth():
             Figures out the current user
         """
         return None
+
+    def session_cookie(self, request=None):
+        if not request:
+            return None
+        session_name = os.getenv('SESSION_NAME')
+        if not session_name:
+            return None
+        return request.cookies.get(session_name)
