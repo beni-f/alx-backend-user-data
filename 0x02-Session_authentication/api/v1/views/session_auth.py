@@ -38,6 +38,9 @@ def login():
         methods=['DELETE'], strict_slashes=False
 )
 def logout():
+    """
+        Logout View
+    """
     from api.v1.app import auth
     status = auth.destory_session(request)
     if not status:
