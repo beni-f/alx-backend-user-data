@@ -41,7 +41,6 @@ def logout():
     """
         Logout View
     """
-    from api.v1.app import auth
     status = auth.destory_session(request)
     if not status:
         abort(404)
