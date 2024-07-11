@@ -41,8 +41,7 @@ def logout():
     """
         Logout View
     """
-    status = auth.destory_session(request)
-    if not status:
+    if not auth.destory_session(request):
         abort(404)
     else:
         return jsonify({}), 200
