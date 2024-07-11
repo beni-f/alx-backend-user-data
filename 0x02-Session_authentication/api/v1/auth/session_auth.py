@@ -3,10 +3,14 @@
 Session Auth
 """
 from typing import TypeVar
+
+from flask.json import jsonify
 from .auth import Auth
 import uuid
 import os
+from flask import request
 from models.user import User
+from api.v1.views import app_views
 
 
 class SessionAuth(Auth):
