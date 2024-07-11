@@ -49,6 +49,9 @@ class SessionAuth(Auth):
         return user
 
     def destory_session(self, request=None):
+        """
+            Deletes the user session
+        """
         if not request:
             return False
         session_id = self.session_cookie(request)
