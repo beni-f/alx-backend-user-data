@@ -5,7 +5,6 @@ Session Authentication View
 from flask import jsonify, request, abort
 from api.v1.views import app_views
 from models.user import User
-from api.v1.app import auth
 import os
 
 
@@ -41,6 +40,7 @@ def logout():
     """
         Logout View
     """
+    from api.v1.app import auth
     if not auth.destory_session(request):
         abort(404)
     else:
