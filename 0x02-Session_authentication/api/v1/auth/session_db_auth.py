@@ -8,6 +8,9 @@ from datetime import datetime, timedelta
 
 
 class SessionDBAuth(SessionExpAuth):
+    """
+       Session Database Authentication 
+    """
     def create_session(self, user_id: str = None) -> str:
         """
             Creates and stores new instance of
