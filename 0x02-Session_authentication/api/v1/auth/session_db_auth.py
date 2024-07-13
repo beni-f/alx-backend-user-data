@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 
 class SessionDBAuth(SessionExpAuth):
     """
-       Session Database Authentication 
+       Session Database Authentication
     """
     def create_session(self, user_id: str = None) -> str:
         """
