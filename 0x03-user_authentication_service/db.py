@@ -5,6 +5,8 @@ from sqlalchemy.exc import NoResultFound, InvalidRequestError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
+import bcrypt
+from bcrypt import hashpw   
 
 from user import Base, User
 
