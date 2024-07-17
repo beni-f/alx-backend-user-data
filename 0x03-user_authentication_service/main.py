@@ -2,7 +2,11 @@
 """
 Main file
 """
+import logging
 from auth import Auth
+
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 
 email = 'me@me.com'
 password = 'mySecuredPwd'
