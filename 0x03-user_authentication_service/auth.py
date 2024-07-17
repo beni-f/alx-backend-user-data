@@ -91,7 +91,7 @@ class Auth:
             return None
         return usr
 
-    def destory_session(self, user_id: int) -> None:
+    def destroy_session(self, user_id: int) -> None:
         """Destroys a session associated with a given user.
         """
         if not user_id:
