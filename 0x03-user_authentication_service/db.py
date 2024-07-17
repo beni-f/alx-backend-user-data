@@ -60,5 +60,5 @@ class DB:
         for k, v in kwargs.items():
             if not hasattr(user, k):
                 raise ValueError("Invalid Attribute")
-            user[k] = v
+            user.k = v
         self._session.commit()
