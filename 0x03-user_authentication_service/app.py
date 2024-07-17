@@ -13,13 +13,13 @@ AUTH = Auth()
 
 
 @app.route('/')
-def message():
+def message() -> str:
     """Message"""
     return jsonify({'message': 'Bienvenue'})
 
 
 @app.route('/users', methods=['POST'])
-def users():
+def users() -> str:
     email = request.form.get('email')
     password = request.form.get('password')
     try:
@@ -30,7 +30,7 @@ def users():
 
 
 @app.route('/sessions', methods=['POST'])
-def login():
+def login() -> str:
     email = request.form.get('email')
     password = request.form.get('password')
     is_valid = AUTH.valid_login(email, password)
@@ -44,7 +44,7 @@ def login():
 
 
 @app.route('/sessions', methods=['DELETE'])
-def logout():
+def logout() -> str:
     """
         Log Out
     """
