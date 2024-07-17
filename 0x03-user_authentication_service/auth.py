@@ -25,7 +25,6 @@ class Auth:
         password = password.encode('utf-8')
         return bcrypt.hashpw(password, salt=bcrypt.gensalt())
 
-
     def register_user(self, email, password):
         """
         Takes email and password as an argument
