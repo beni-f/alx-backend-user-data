@@ -67,7 +67,10 @@ class Auth:
         """
             Creates a session id for the user.
         """
-        usr = self._db.find_user_by(email=email)
+        try:
+            usr = self._db.find_user_by(email=email)
+        except NoResultFound:
+            return None
         session_id = _generate_uuid()
         self._db.update_user(usr.id, session_id=session_id)
         return session_id
