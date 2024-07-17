@@ -49,7 +49,7 @@ class DB:
         except InvalidRequestError:
             raise InvalidRequestError("Invalid query arguments provided")
 
-    def update_user(self, user_id, **kwargs):
+    def update_user(self, user_id, **kwargs) -> User:
         """
         Update the user's attributes as passed in the method's arguments then
         commit changes to the database
