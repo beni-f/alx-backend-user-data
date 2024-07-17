@@ -18,7 +18,7 @@ class Auth:
         """
         self._db = DB()
 
-    def _hash_password(password):
+    def _hash_password(self, password):
         """
             Hash a password
         """
