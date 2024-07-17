@@ -8,7 +8,7 @@ from user import User
 from sqlalchemy.orm.exc import NoResultFound
 
 
-def _hash_password(password):
+def _hash_password(password: str) -> bytes:
     """
         Hash a password
     """
@@ -26,7 +26,7 @@ class Auth:
         """
         self._db = DB()
 
-    def register_user(self, email, password):
+    def register_user(self, email: str, password: str) -> User:
         """
         Takes email and password as an argument
         then checks if email already exists or
