@@ -58,7 +58,7 @@ def logout() -> str:
 
 
 @app.route('/profile', methods=['GET'])
-def profile():
+def profile() -> str:
     """
         Find a user using a session_id cookie obtained from the user request
     """
@@ -74,7 +74,7 @@ def profile():
 
 
 @app.route('/reset_password', methods=['POST'])
-def reset_password():
+def reset_password() -> str:
     """
         Get a reset password token
     """
@@ -89,7 +89,7 @@ def reset_password():
 
 
 @app.route('/reset_password', methods=['PUT'])
-def reset_password():
+def update_password() -> str:
     """
         Update Password
     """
