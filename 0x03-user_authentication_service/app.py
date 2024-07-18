@@ -100,7 +100,7 @@ def reset_password():
         user = AUTH._db.find_user_by(reset_token=reset_token)
         AUTH.update_password(reset_token, new_password)
         return jsonify({'email': email, 'message': 'Password updated'})
-    except:
+    except NoResultFound:
         abort(403)
 
 
