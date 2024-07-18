@@ -1,14 +1,9 @@
-#!/usr/bin/env python3
 """
 Main file
 """
-from auth import Auth
+from user import User
 
-email = 'bob@bob.com'
-password = 'MyPwdOfBob'
-auth = Auth()
+print(User.__tablename__)
 
-auth.register_user(email, password)
-
-print(auth.create_session(email))
-print(auth.create_session("unknown@email.com"))
+for column in User.__table__.columns:
+    print("{}: {}".format(column, column.type))

@@ -47,9 +47,9 @@ class DB:
             user = self._session.query(User).filter_by(**kwargs).one()
             return user
         except NoResultFound:
-            raise NoResultFound(f"No user found with the specified attributes")
+            raise
         except InvalidRequestError:
-            raise InvalidRequestError("Invalid query arguments provided")
+            raise
 
     def update_user(self, user_id: int, **kwargs) -> User:
         """
@@ -60,5 +60,5 @@ class DB:
         for k, v in kwargs.items():
             if not hasattr(user, k):
                 raise ValueError("Invalid Attribute")
-            user.k = v
+            setattr(user, k, v)
         self._session.commit()
