@@ -2,11 +2,14 @@
 """Integration test
 """
 import requests
+from collections.abc import Mapping
+from collections.abc import MutableMapping
+from collections.abc import Sequence
 
 
-EMAIL = "benifissha@gmail.com"
-PASSWD = "benifis123"
-NEW_PASSWD = "benifissha123"
+EMAIL = "guillaume@holberton.io"
+PASSWD = "b4l0u"
+NEW_PASSWD = "t4rt1fl3tt3"
 BASE_URL = "http://0.0.0.0:5000"
 
 
@@ -112,6 +115,7 @@ def update_password(email: str, reset_token: str, new_password: str) -> None:
 
 
 if __name__ == "__main__":
+
     register_user(EMAIL, PASSWD)
     log_in_wrong_password(EMAIL, NEW_PASSWD)
     profile_unlogged()
